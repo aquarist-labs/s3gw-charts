@@ -9,6 +9,8 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares:
       '{{ .Release.Namespace }}-cors-header@kubernetescrd'
+  labels:
+{{ include "s3gw.labels" . | indent 4 }}
 spec:
   tls:
     - hosts:
@@ -35,6 +37,8 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares:
       '{{ .Release.Namespace }}-cors-header@kubernetescrd'
+  labels:
+{{ include "s3gw.labels" . | indent 4 }}
 spec:
   rules:
     - host: 'no-tls-{{ .Values.hostname }}'
@@ -58,6 +62,8 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares:
       '{{ .Release.Namespace }}-cors-header@kubernetescrd'
+  labels:
+{{ include "s3gw.labels" . | indent 4 }}
 spec:
   tls:
     - hosts:
@@ -104,6 +110,8 @@ kind: Middleware
 metadata:
   name: cors-header
   namespace: {{ .Release.Namespace }}
+  labels:
+{{ include "s3gw.labels" . | indent 4 }}
 spec:
   headers:
     accessControlAllowMethods:
